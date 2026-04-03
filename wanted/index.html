@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Сантехник — вызов на дом</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f4f8;
+            color: #1e293b;
+            line-height: 1.4;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* карточка */
+        .card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 16px;
+        }
+
+        .header {
+            background: #0f3b5c;
+            color: white;
+            padding: 32px 20px 28px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .badge {
+            background: #facc15;
+            color: #0f3b5c;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .content {
+            padding: 24px 20px;
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .service-list li:before {
+            content: "✅";
+            font-size: 20px;
+        }
+
+        .price-tag {
+            background: #eef2ff;
+            padding: 16px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .price-tag span {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f3b5c;
+        }
+
+        .button {
+            display: block;
+            background: #1e7e34;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            border-radius: 60px;
+            margin: 20px 0 12px;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .button-wa {
+            background: #25D366;
+        }
+
+        .button-call {
+            background: #0f3b5c;
+        }
+
+        .button:hover {
+            opacity: 0.92;
+            transform: scale(0.98);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 13px;
+            color: #5b6e8c;
+            padding: 16px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        hr {
+            margin: 16px 0;
+            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <h1>Алексей Сантехник</h1>
+            <p>Приеду за 30–60 минут</p>
+            <div class="badge">⚡️ БЕЗ ВЫХОДНЫХ</div>
+        </div>
+        <div class="content">
+            <div class="price-tag">
+                Выезд и диагностика — <span>0 ₽</span><br>
+                <small style="font-size: 14px;">при последующем ремонте</small>
+            </div>
+
+            <ul class="service-list">
+                <li>Устранение засоров</li>
+                <li>Замена смесителей, сифонов</li>
+                <li>Ремонт унитазов, бачков</li>
+                <li>Установка стиральных машин</li>
+                <li>Замена труб, радиаторов</li>
+                <li>Подключение техники</li>
+            </ul>
+
+            <hr>
+
+            <a href="tel:+79125556232" class="button button-call">📞 ПОЗВОНИТЬ СЕЙЧАС</a>
+
+            <a href="https://wa.me/+79125556232" class="button button-wa">💬 НАПИСАТЬ В WhatsApp</a>
+
+            <div class="footer-note">
+                ⏱ Работаю по всему району<br>
+                🔧 Гарантия на все работы — 1 год
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content" style="text-align: center;">
+            <strong>📲 Оставьте телефон — перезвоню за 3 минуты</strong>
+            <form action="#" style="margin-top: 16px;" onsubmit="alert('Спасибо! Я вам перезвоню. Сохраните номер: +79125556232'); return false;">
+                <input type="tel" placeholder="+7 ___ ___ __ __" required style="width: 100%; padding: 16px; font-size: 16px; border-radius: 60px; border: 1px solid #cbd5e1; margin-bottom: 12px;">
+                <button type="submit" style="background: #0f3b5c; color: white; border: none; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; border-radius: 60px;">📞 ЖДУ ЗВОНКА</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
