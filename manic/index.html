@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Маникюр на дому — запись онлайн</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #fdf8f5;
+            color: #2d1b2e;
+            line-height: 1.4;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            margin-bottom: 16px;
+        }
+
+        .header {
+            background: #f7cad0;
+            color: #5e2e3c;
+            padding: 32px 20px 28px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.85;
+        }
+
+        .badge {
+            background: #ff85a1;
+            color: white;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .content {
+            padding: 24px 20px;
+        }
+
+        .price-highlight {
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 32px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .price-highlight .price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #c13b5e;
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0e0e4;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .service-list li:before {
+            content: "💅";
+            font-size: 20px;
+        }
+
+        .button {
+            display: block;
+            background: #c13b5e;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            border-radius: 60px;
+            margin: 20px 0 12px;
+            transition: 0.2s;
+        }
+
+        .button-wa {
+            background: #25D366;
+        }
+
+        .button:hover {
+            opacity: 0.92;
+            transform: scale(0.98);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 13px;
+            color: #a07a86;
+            padding: 16px;
+        }
+
+        hr {
+            margin: 16px 0;
+            border: none;
+            border-top: 1px solid #f0e0e4;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <h1>Анна — маникюр</h1>
+            <p>На дому в ЖК «Солнечный»</p>
+            <div class="badge">✨ Стерилизация инструментов</div>
+        </div>
+        <div class="content">
+            <div class="price-highlight">
+                Классический маникюр<br>
+                <span class="price">1200 ₽</span><br>
+                <small>с покрытием — 1800 ₽</small>
+            </div>
+
+            <ul class="service-list">
+                <li>Классический/аппаратный маникюр</li>
+                <li>Покрытие гель-лак (CND / Luxio)</li>
+                <li>Снятие гель-лака</li>
+                <li>Укрепление ногтей (база)</li>
+                <li>Дизайн, френч, градиент</li>
+                <li>Педикюр (по запросу)</li>
+            </ul>
+
+            <hr>
+
+            <a href="tel:+79123456789" class="button">📞 ЗАПИСАТЬСЯ ПО ТЕЛЕФОНУ</a>
+
+            <a href="https://wa.me/79123456789" class="button button-wa">💬 ЗАПИСЬ В WhatsApp</a>
+
+            <div class="footer-note">
+                🌸 Работаю с 10:00 до 21:00<br>
+                🏠 Выезд на дом: +300 ₽ в пределах района
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content" style="text-align: center;">
+            <strong>📲 Оставьте номер — позвоню и запишу</strong>
+            <form action="#" style="margin-top: 16px;" onsubmit="alert('Спасибо! Я вам перезвоню. Сохраните номер: +79123456789'); return false;">
+                <input type="tel" placeholder="+7 ___ ___ __ __" required style="width: 100%; padding: 16px; font-size: 16px; border-radius: 60px; border: 1px solid #f0c0cb; margin-bottom: 12px;">
+                <button type="submit" style="background: #c13b5e; color: white; border: none; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; border-radius: 60px;">💖 ХОЧУ ЗАПИСАТЬСЯ</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
