@@ -18,35 +18,29 @@
             line-height: 1.4;
         }
 
-        /* плавный скролл */
         html {
             scroll-behavior: smooth;
         }
 
-        /* контейнер */
         .container {
             max-width: 680px;
             margin: 0 auto;
             padding: 16px 16px 40px;
         }
 
-        /* карточки */
         .card {
             background: white;
             border-radius: 40px;
             overflow: hidden;
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
             margin-bottom: 20px;
-            transition: 0.2s;
         }
 
-        /* хедер с вензелем */
         .hero {
             background: #1f2b25;
             padding: 48px 24px 44px;
             text-align: center;
             color: #f2e7cf;
-            position: relative;
         }
 
         .hero h1 {
@@ -73,7 +67,7 @@
             border: 1px solid rgba(230, 190, 120, 0.5);
         }
 
-        /* галерея-сетка (3 колонки) */
+        /* галерея-сетка */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -83,24 +77,61 @@
 
         .grid-item {
             aspect-ratio: 1 / 1;
-            background: #e9e2d4;
             border-radius: 24px;
             overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .grid-item img {
+        .grid-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* плейсхолдер с анимацией */
+        .placeholder-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #7e6b4c;
+            background: #e9e2d4;
+            text-align: center;
+            transition: all 0.25s ease;
         }
 
-        .grid-item img:hover {
-            transform: scale(1.02);
+        .grid-item:hover .placeholder-img {
+            background: #ddd0b8;
+            transform: scale(1.0);
         }
 
-        /* секция "о студии" */
+        .placeholder-img span {
+            font-size: 42px;
+            margin-bottom: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .grid-item:hover .placeholder-img span {
+            transform: scale(1.1);
+        }
+
+        .placeholder-img small {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        /* разные цвета для плейсхолдеров */
+        .grid-item:nth-child(1) .placeholder-img { background: #e2d9cb; }
+        .grid-item:nth-child(2) .placeholder-img { background: #d9cfbc; }
+        .grid-item:nth-child(3) .placeholder-img { background: #ccc1aa; }
+        .grid-item:nth-child(4) .placeholder-img { background: #e5d9c6; }
+        .grid-item:nth-child(5) .placeholder-img { background: #ded0b8; }
+        .grid-item:nth-child(6) .placeholder-img { background: #f0e5d3; }
+
         .about {
             padding: 20px 24px 12px;
         }
@@ -112,7 +143,6 @@
             color: #2f3e32;
         }
 
-        /* этапы работ (вертикальный список) */
         .steps {
             padding: 8px 24px 12px;
         }
@@ -144,7 +174,6 @@
             color: #5f5a4e;
         }
 
-        /* цены */
         .price-row {
             background: #fefaf2;
             border-radius: 32px;
@@ -160,7 +189,6 @@
             color: #b47c3e;
         }
 
-        /* кнопки */
         .button {
             display: block;
             background: #b47c3e;
@@ -197,7 +225,7 @@
             margin-top: 12px;
         }
 
-        /* модальное окно */
+        /* модальное окно для формы */
         .modal {
             display: none;
             position: fixed;
@@ -237,11 +265,59 @@
             font-size: 28px;
             cursor: pointer;
         }
+
+        /* lightbox для увеличения фото */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+            cursor: pointer;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80%;
+            text-align: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .lightbox-caption {
+            color: white;
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-lightbox:hover {
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- шапка -->
     <div class="card">
         <div class="hero">
             <h1>Интерьер с душой</h1>
@@ -249,19 +325,30 @@
             <div class="hero-badge">✨ 7 лет • 120+ реализованных проектов</div>
         </div>
 
-        <!-- портфолио сеткой 3х3 (заглушки, замените на реальные фото) -->
+        <!-- галерея с анимацией и data-атрибутами для lightbox -->
         <div class="gallery-grid">
-            <div class="grid-item"><img src="https://placehold.co/400x400/e2d9cb/a8906b?text=Гостиная" alt="интерьер 1"></div>
-            <div class="grid-item"><img src="https://placehold.co/400x400/d9cfbc/a07d52?text=Спальня" alt="интерьер 2"></div>
-            <div class="grid-item"><img src="https://placehold.co/400x400/ccc1aa/8f6e42?text=Кухня" alt="интерьер 3"></div>
-            <div class="grid-item"><img src="https://placehold.co/400x400/e5d9c6/9e7b50?text=Ванная" alt="интерьер 4"></div>
-            <div class="grid-item"><img src="https://placehold.co/400x400/ded0b8/b2824a?text=Кабинет" alt="интерьер 5"></div>
-            <div class="grid-item"><img src="https://placehold.co/400x400/f0e5d3/c5965e?text=Детская" alt="интерьер 6"></div>
+            <div class="grid-item" data-title="Гостиная" data-icon="🛋️">
+                <div class="placeholder-img"><span>🛋️</span><small>Гостиная</small></div>
+            </div>
+            <div class="grid-item" data-title="Спальня" data-icon="🛏️">
+                <div class="placeholder-img"><span>🛏️</span><small>Спальня</small></div>
+            </div>
+            <div class="grid-item" data-title="Кухня" data-icon="🍳">
+                <div class="placeholder-img"><span>🍳</span><small>Кухня</small></div>
+            </div>
+            <div class="grid-item" data-title="Ванная" data-icon="🛁">
+                <div class="placeholder-img"><span>🛁</span><small>Ванная</small></div>
+            </div>
+            <div class="grid-item" data-title="Кабинет" data-icon="📚">
+                <div class="placeholder-img"><span>📚</span><small>Кабинет</small></div>
+            </div>
+            <div class="grid-item" data-title="Детская" data-icon="🧸">
+                <div class="placeholder-img"><span>🧸</span><small>Детская</small></div>
+            </div>
         </div>
-        <div class="footer-note" style="border: none; padding-top: 0;">▶️ нажмите на фото, чтобы увеличить (можно добавить lightbox)</div>
+        <div class="footer-note" style="border: none; padding-top: 0;">▶️ нажмите на фото — откроется увеличенный вид</div>
     </div>
 
-    <!-- о студии -->
     <div class="card">
         <div class="about">
             <h3>О студии</h3>
@@ -269,7 +356,6 @@
         </div>
     </div>
 
-    <!-- этапы работы (новая структура) -->
     <div class="card">
         <div class="steps">
             <div class="step-item">
@@ -291,7 +377,6 @@
         </div>
     </div>
 
-    <!-- цены -->
     <div class="card">
         <div class="price-row">
             <div>💡 Стоимость дизайн-проекта</div>
@@ -300,7 +385,6 @@
         </div>
     </div>
 
-    <!-- кнопки -->
     <div class="card" style="padding: 8px 0 20px;">
         <button class="button" id="openModalBtn">📐 РАССЧИТАТЬ СТОИМОСТЬ</button>
         <a href="https://wa.me/79123456789" class="button button-wa">💬 ОБСУДИТЬ ПРОЕКТ В WHATSAPP</a>
@@ -309,7 +393,7 @@
     </div>
 </div>
 
-<!-- модальное окно -->
+<!-- модальное окно для формы -->
 <div id="priceModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -323,8 +407,17 @@
     </div>
 </div>
 
+<!-- lightbox для увеличения фото -->
+<div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <div class="lightbox-content">
+        <div class="lightbox-img" style="font-size: 120px; text-align: center; background: #3a3224; border-radius: 32px; padding: 60px 40px;">🛋️</div>
+        <div class="lightbox-caption">Гостиная</div>
+    </div>
+</div>
+
 <script>
-    // модалка
+    // модалка для формы
     const modal = document.getElementById('priceModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.querySelector('.close-modal');
@@ -338,6 +431,41 @@
     window.onclick = function(event) {
         if (event.target === modal) {
             modal.style.display = 'none';
+        }
+    }
+
+    // lightbox для галереи
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const lightboxCaption = document.querySelector('.lightbox-caption');
+    const closeLightbox = document.querySelector('.close-lightbox');
+    const gridItems = document.querySelectorAll('.grid-item');
+
+    function openLightbox(icon, title) {
+        lightboxImg.innerHTML = icon;
+        lightboxImg.style.fontSize = '120px';
+        lightboxImg.style.display = 'flex';
+        lightboxImg.style.alignItems = 'center';
+        lightboxImg.style.justifyContent = 'center';
+        lightboxCaption.textContent = title;
+        lightbox.style.display = 'flex';
+    }
+
+    gridItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const icon = this.getAttribute('data-icon');
+            const title = this.getAttribute('data-title');
+            openLightbox(icon, title);
+        });
+    });
+
+    closeLightbox.onclick = function() {
+        lightbox.style.display = 'none';
+    }
+
+    lightbox.onclick = function(event) {
+        if (event.target === lightbox) {
+            lightbox.style.display = 'none';
         }
     }
 </script>
