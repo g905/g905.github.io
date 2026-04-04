@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Ремонт техники — мастер на дом</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #f5f0e7 0%, #e8e0d5 100%);
+            padding: 20px 16px 40px;
+            color: #1f2a2e;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* карточка */
+        .card {
+            background: white;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 40px -14px rgba(0, 0, 0, 0.2);
+        }
+
+        /* яркая шапка */
+        .hero {
+            background: linear-gradient(135deg, #ff7b2c 0%, #ff3a00 100%);
+            padding: 40px 24px 36px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* иконки-карусель (какие бренды чиним) */
+        .brands {
+            padding: 24px 20px 12px;
+            text-align: center;
+        }
+
+        .brands-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #ff5a1f;
+        }
+
+        .brand-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding-bottom: 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .brand-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .brand-scroll::-webkit-scrollbar-track {
+            background: #f0e4d8;
+            border-radius: 10px;
+        }
+
+        .brand-scroll::-webkit-scrollbar-thumb {
+            background: #ff7b2c;
+            border-radius: 10px;
+        }
+
+        .brand-chip {
+            flex: 0 0 auto;
+            background: #f8f3ed;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #2c3e2f;
+            scroll-snap-align: start;
+            transition: all 0.2s ease;
+            border: 1px solid #ffe0cc;
+        }
+
+        .brand-chip:hover {
+            background: #ff7b2c;
+            color: white;
+            transform: scale(1.03);
+            border-color: #ff7b2c;
+        }
+
+        /* список услуг с анимацией */
+        .services {
+            padding: 16px 24px 8px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #2d3e2b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 18px;
+            background: #fefaf5;
+            border-radius: 60px;
+            border: 1px solid #ffe0cc;
+            transition: all 0.25s ease;
+            animation: fadeInUp 0.4s ease backwards;
+        }
+
+        .service-item:hover {
+            background: #fff3e8;
+            transform: translateX(6px);
+            border-color: #ff7b2c;
+        }
+
+        .service-icon {
+            font-size: 32px;
+        }
+
+        .service-text {
+            font-weight: 600;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-item:nth-child(1) { animation-delay: 0.05s; }
+        .service-item:nth-child(2) { animation-delay: 0.1s; }
+        .service-item:nth-child(3) { animation-delay: 0.15s; }
+        .service-item:nth-child(4) { animation-delay: 0.2s; }
+        .service-item:nth-child(5) { animation-delay: 0.25s; }
+        .service-item:nth-child(6) { animation-delay: 0.3s; }
+
+        /* цена */
+        .price-block {
+            background: linear-gradient(90deg, #fff0e6, #ffffff);
+            border-radius: 28px;
+            padding: 16px 20px;
+            margin: 12px 24px 20px;
+            text-align: center;
+            border-left: 5px solid #ff7b2c;
+        }
+
+        .price-big {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ff5a1f;
+        }
+
+        /* кнопки */
+        .button {
+            display: block;
+            background: #ff7b2c;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 60px;
+            margin: 16px 24px 12px;
+            transition: 0.2s;
+            border: none;
+            width: calc(100% - 48px);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 91, 31, 0.3);
+        }
+
+        .button-wa {
+            background: #25a35c;
+            box-shadow: 0 4px 12px rgba(37, 163, 92, 0.3);
+        }
+
+        .button:hover {
+            opacity: 0.92;
+            transform: scale(0.98);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 13px;
+            color: #8b7a69;
+            padding: 20px 24px;
+            border-top: 1px solid #f0e4d8;
+            margin-top: 8px;
+        }
+
+        /* плавающая кнопка */
+        .floating-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 16px;
+            background: #25a35c;
+            width: 56px;
+            height: 56px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: 0.2s;
+            text-decoration: none;
+            animation: bounce 1.2s ease infinite;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.08);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        hr {
+            margin: 8px 24px;
+            border: none;
+            border-top: 1px solid #f0e4d8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="hero">
+            <h1>⚡ Ремонт техники</h1>
+            <p>Приедем за 1 час • Диагностика 0 ₽</p>
+            <div class="hero-badge">🔧 Мастер на дом • Любые бренды</div>
+        </div>
+
+        <div class="brands">
+            <div class="brands-title">✅ Какие бренды чиним</div>
+            <div class="brand-scroll">
+                <div class="brand-chip">LG</div>
+                <div class="brand-chip">Samsung</div>
+                <div class="brand-chip">Bosch</div>
+                <div class="brand-chip">Whirlpool</div>
+                <div class="brand-chip">Electrolux</div>
+                <div class="brand-chip">Indesit</div>
+                <div class="brand-chip">Xiaomi</div>
+                <div class="brand-chip">Haier</div>
+                <div class="brand-chip">Miele</div>
+            </div>
+        </div>
+
+        <div class="services">
+            <div class="section-title">🛠️ Что ремонтируем</div>
+            <div class="service-grid">
+                <div class="service-item"><span class="service-icon">🧺</span><span class="service-text">Стиральные машины</span></div>
+                <div class="service-item"><span class="service-icon">❄️</span><span class="service-text">Холодильники</span></div>
+                <div class="service-item"><span class="service-icon">🍳</span><span class="service-text">Плиты и варочные панели</span></div>
+                <div class="service-item"><span class="service-icon">🍽️</span><span class="service-text">Посудомоечные машины</span></div>
+                <div class="service-item"><span class="service-icon">🔥</span><span class="service-text">Электродуховки и СВЧ</span></div>
+                <div class="service-item"><span class="service-icon">💨</span><span class="service-text">Вытяжки и встраиваемая техника</span></div>
+            </div>
+        </div>
+
+        <div class="price-block">
+            🔧 Выезд и диагностика — <strong>бесплатно</strong><br>
+            <span class="price-big">от 1 200 ₽</span> + запчасти
+        </div>
+
+        <a href="tel:+79123456789" class="button">📞 ВЫЗВАТЬ МАСТЕРА</a>
+        <a href="https://wa.me/79123456789" class="button button-wa">💬 НАПИСАТЬ В WHATSAPP</a>
+
+        <div class="footer-note">
+            ✅ Гарантия на работы до 12 месяцев<br>
+            🕒 Работаем без выходных с 9:00 до 21:00<br>
+            🏠 Выезд по всему городу
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="services" style="padding: 20px 24px;">
+            <div class="section-title">📲 Оставить заявку</div>
+            <form onsubmit="alert('Спасибо! Мастер свяжется с вами через 10 минут. Сохраните номер: +79123456789'); return false;">
+                <input type="text" placeholder="Ваше имя" required style="width:100%; padding:16px; border-radius:60px; border:1px solid #f0dcc8; background:#fefaf5; margin-bottom:12px; font-size:16px;">
+                <input type="tel" placeholder="+7 ___ ___ __ __" required style="width:100%; padding:16px; border-radius:60px; border:1px solid #f0dcc8; background:#fefaf5; margin-bottom:16px; font-size:16px;">
+                <button type="submit" style="background:#ff7b2c; color:white; border:none; width:100%; padding:16px; border-radius:60px; font-weight:700; font-size:18px; cursor:pointer;">📞 ЖДУ ЗВОНКА</button>
+            </form>
+            <div class="footer-note" style="border:none; padding-top:12px;">⚡ Перезвоним через 5–10 минут</div>
+        </div>
+    </div>
+</div>
+
+<a href="https://wa.me/79123456789" class="floating-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.87.52 3.62 1.44 5.13L2 22l5.03-1.44C8.49 21.5 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1.5 14.25c-.3.3-.69.45-1.08.45-.39 0-.78-.15-1.08-.45L9 14.25c-.6-.6-.6-1.5 0-2.1l1.5-1.5c.3-.3.69-.45 1.08-.45.39 0 .78.15 1.08.45l.75.75 2.25-2.25-.75-.75c-.6-.6-.6-1.5 0-2.1l1.5-1.5c.6-.6 1.5-.6 2.1 0l2.25 2.25c.6.6.6 1.5 0 2.1l-1.5 1.5c-.6.6-1.5.6-2.1 0l-.75-.75-2.25 2.25.75.75c.3.3.45.69.45 1.08 0 .39-.15.78-.45 1.08l-1.5 1.5z"/>
+    </svg>
+</a>
+</body>
+</html>
