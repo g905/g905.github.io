@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Ремонт квартир под ключ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #2a2a2a;
+            background-image: repeating-linear-gradient(45deg, rgba(60,60,60,0.3) 0px, rgba(60,60,60,0.3) 1px, transparent 1px, transparent 8px);
+            padding: 20px 16px 40px;
+            color: #1f1f1f;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* главная карточка */
+        .card {
+            background: #fffef7;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.35);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,250,225,0.3);
+        }
+
+        /* шапка с текстурой */
+        .hero {
+            background: #1e2a2f;
+            background-image: radial-gradient(circle at 20% 40%, rgba(230,180,100,0.12) 2%, transparent 2.5%);
+            background-size: 35px 35px;
+            padding: 42px 24px 36px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .rating {
+            background: rgba(255,215,130,0.2);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255,215,130,0.4);
+        }
+
+        /* карусель услуг */
+        .services-carousel {
+            padding: 28px 20px 10px;
+            background: #fffef7;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding-left: 8px;
+            color: #2f3e2e;
+            border-left: 6px solid #e0a82b;
+        }
+
+        .carousel-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 12px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .carousel-scroll::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .carousel-scroll::-webkit-scrollbar-track {
+            background: #e9e2d0;
+            border-radius: 10px;
+        }
+
+        .carousel-scroll::-webkit-scrollbar-thumb {
+            background: #b88b3a;
+            border-radius: 10px;
+        }
+
+        .service-tile {
+            flex: 0 0 170px;
+            scroll-snap-align: start;
+            background: #faf7ef;
+            border-radius: 32px;
+            padding: 20px 12px;
+            text-align: center;
+            border: 1px solid #efe2cf;
+            transition: 0.2s;
+        }
+
+        .service-tile span {
+            font-size: 42px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .service-tile h4 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* содержание */
+        .content {
+            padding: 8px 24px 28px;
+        }
+
+        .price-block {
+            background: #f2ede0;
+            border-radius: 60px;
+            padding: 14px 20px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #e1d5bd;
+        }
+
+        .price {
+            font-size: 34px;
+            font-weight: 800;
+            color: #b1621a;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0e7d8;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .feature-list li:before {
+            content: "🔨";
+            font-size: 22px;
+        }
+
+        .button {
+            display: block;
+            background: #c47a2e;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            border-radius: 60px;
+            margin: 20px 0 12px;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+
+        .button-wa {
+            background: #2b7a4b;
+        }
+
+        .button:hover {
+            opacity: 0.92;
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 13px;
+            color: #8f7b5c;
+            padding: 20px 0 10px;
+            border-top: 1px solid #efe2cf;
+            margin-top: 16px;
+        }
+
+        hr {
+            margin: 12px 0;
+            border: none;
+            border-top: 1px solid #efe2cf;
+        }
+
+        /* плавающая кнопка */
+        .floating-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 16px;
+            background: #25D366;
+            width: 56px;
+            height: 56px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            z-index: 100;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-btn img {
+            width: 32px;
+            height: 32px;
+            filter: brightness(0) invert(1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="hero">
+            <h1>Ремонт квартир</h1>
+            <p>под ключ — без посредников</p>
+            <div class="rating">⭐ 4,9 • 87 отзывов • гарантия 2 года</div>
+        </div>
+
+        <!-- карусель видов ремонта -->
+        <div class="services-carousel">
+            <div class="section-title">🧱 Что мы делаем</div>
+            <div class="carousel-scroll">
+                <div class="service-tile"><span>🛠️</span><h4>Косметический</h4><small>от 7 дней</small></div>
+                <div class="service-tile"><span>🏗️</span><h4>Капитальный</h4><small>стены/пол/потолок</small></div>
+                <div class="service-tile"><span>🚽</span><h4>Санузел под ключ</h4><small>плитка, санфаянс</small></div>
+                <div class="service-tile"><span>🍳</span><h4>Кухня</h4><small>электрика, столешница</small></div>
+                <div class="service-tile"><span>🔌</span><h4>Электрика</h4><small>щитки, проводка</small></div>
+                <div class="service-tile"><span>🚰</span><h4>Сантехника</h4><small>разводка, монтаж</small></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="price-block">
+                💰 Выезд и смета — <strong>бесплатно</strong><br>
+                Ремонт от <span class="price">3 900 ₽/м²</span>
+            </div>
+
+            <ul class="feature-list">
+                <li>Дизайн-проект + 3D-визуализация</li>
+                <li>Черновая и чистовая отделка</li>
+                <li>Стяжка пола, штукатурка стен</li>
+                <li>Укладка плитки, ламината, паркета</li>
+                <li>Монтаж гипсокартона, натяжные потолки</li>
+                <li>Замена окон, радиаторов, дверей</li>
+                <li>Электрика под ключ (розетки, свет, щиток)</li>
+                <li>Сантехника: от смесителя до бойлера</li>
+            </ul>
+
+            <hr>
+
+            <a href="tel:+79123456789" class="button">📞 ВЫЗВАТЬ ЗАМЕРЩИКА</a>
+            <a href="https://wa.me/79123456789" class="button button-wa">💬 РАССЧИТАТЬ СМЕТУ В WHATSAPP</a>
+
+            <div class="footer-note">
+                🏠 Работаем по договору + смета фиксируется<br>
+                🧾 Чек, гарантия на все работы до 3 лет<br>
+                📍 Москва, МО, регионы (по договорённости)
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content" style="text-align: center;">
+            <strong>📐 Оставьте телефон — пришлём примеры работ и смету за 30 минут</strong>
+            <form action="#" style="margin-top: 18px;" onsubmit="alert('Спасибо! Замерщик свяжется с вами в течение часа. Сохраните номер: +79123456789'); return false;">
+                <input type="tel" placeholder="+7 ___ ___ __ __" required style="width: 100%; padding: 16px; font-size: 16px; border-radius: 60px; border: 1px solid #d8cbaf; background: #fefcf7; margin-bottom: 12px;">
+                <button type="submit" style="background: #c47a2e; color: white; border: none; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; border-radius: 60px; cursor: pointer;">🔨 ПОЛУЧИТЬ РАСЧЁТ</button>
+            </form>
+            <div class="footer-note" style="border: none;">⚡ Бесплатный выезд на замер в течение суток</div>
+        </div>
+    </div>
+</div>
+
+<!-- плавающая кнопка WhatsApp -->
+<a href="https://wa.me/79123456789" class="floating-btn" style="background:#25D366;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white">
+        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.87.52 3.62 1.44 5.13L2 22l5.03-1.44C8.49 21.5 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1.5 14.25c-.3.3-.69.45-1.08.45-.39 0-.78-.15-1.08-.45L9 14.25c-.6-.6-.6-1.5 0-2.1l1.5-1.5c.3-.3.69-.45 1.08-.45.39 0 .78.15 1.08.45l.75.75 2.25-2.25-.75-.75c-.6-.6-.6-1.5 0-2.1l1.5-1.5c.6-.6 1.5-.6 2.1 0l2.25 2.25c.6.6.6 1.5 0 2.1l-1.5 1.5c-.6.6-1.5.6-2.1 0l-.75-.75-2.25 2.25.75.75c.3.3.45.69.45 1.08 0 .39-.15.78-.45 1.08l-1.5 1.5z"/>
+    </svg>
+</a>
+</body>
+</html>
