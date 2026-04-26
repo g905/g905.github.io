@@ -7,8 +7,7 @@ import Footer from '../../components/Footer.astro';
 const allPosts = await Astro.glob('../../content/posts/*.md');
 
 // Сортируем по дате
-const sortedPosts = allPosts.sort((a, b) => 
-    new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
 );
 
 export async function getStaticPaths() {
@@ -28,7 +27,7 @@ const { Content } = await post.render();
 
 <Layout title={`ZHAR — ${post.frontmatter.title}`}>
     <Header />
-    
+
     <article class="post-full">
         <h1>{post.frontmatter.title}</h1>
         <div class="post-meta">{post.frontmatter.date}</div>

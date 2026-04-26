@@ -8,14 +8,13 @@ import PostCard from '../components/PostCard.astro';
 const allPosts = await Astro.glob('../content/posts/*.md');
 
 // Сортируем по дате (новые сверху)
-const posts = allPosts.sort((a, b) => 
-    new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+const posts = allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
 );
 ---
 
 <Layout title="ZHAR — музыкальный блог">
     <Header />
-    
+
     <section class="hero">
         <h1>музыка и мысли</h1>
         <p>поп-панк, электроника, брейкбит. и немного слов.</p>
