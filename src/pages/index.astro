@@ -4,31 +4,40 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/PostCard.astro';
 
-// Импортируем все посты
+// Получаем все посты
 const allPosts = await Astro.glob('../content/posts/*.md');
 
 // Сортируем по дате (новые сверху)
-const posts = allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+const posts = allPosts.sort((a, b) => 
+    new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
 );
 ---
 
 <Layout title="ZHAR — музыкальный блог">
     <Header />
-
+    
     <section class="hero">
         <h1>музыка и мысли</h1>
         <p>поп-панк, электроника, брейкбит. и немного слов.</p>
     </section>
 
     <section class="posts">
-        {posts.map(post => (
-            <PostCard post={{
-                title: post.frontmatter.title,
-                date: post.frontmatter.date,
-                excerpt: post.frontmatter.excerpt || "Новый пост",
-                link: `/posts/${post.url.split('/').pop().replace('.html', '')}`
-            }} />
-        ))}
+        {
+            posts.map((post) => {
+                // Извлекаем slug из пути к файлу
+                const filePath = post.file;
+                const slug = filePath.split('/').pop().replace('.md', '');
+                
+                return (
+                    <PostCard post={{
+                        title: post.frontmatter.title,
+                        date: post.frontmatter.date,
+                        excerpt: post.frontmatter.excerpt || post.frontmatter.description || "Читать далее...",
+                        link: `/posts/${slug}`
+                    }} />
+                );
+            })
+        }
     </section>
 
     <Footer />

@@ -3,17 +3,20 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
-// Импортируем все посты
-const allPosts = await Astro.glob('../../content/posts/*.md');
-
-// Сортируем по дате
-const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
-);
-
+// Получаем все посты напрямую
 export async function getStaticPaths() {
-    return sortedPosts.map((post) => {
-        // Получаем slug из имени файла
-        const slug = post.url.split('/').pop().replace('.html', '');
+    // Импортируем все .md файлы
+    const posts = await Astro.glob('../../content/posts/*.md');
+    
+    // Сортируем (необязательно, но для порядка)
+    posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+    
+    // Возвращаем пути для каждого поста
+    return posts.map((post) => {
+        // Извлекаем slug из полного пути к файлу
+        const filePath = post.file;
+        const slug = filePath.split('/').pop().replace('.md', '');
+        
         return {
             params: { slug },
             props: { post },
@@ -21,13 +24,14 @@ export async function getStaticPaths() {
     });
 }
 
+// Получаем пропс из getStaticPaths
 const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
 <Layout title={`ZHAR — ${post.frontmatter.title}`}>
     <Header />
-
+    
     <article class="post-full">
         <h1>{post.frontmatter.title}</h1>
         <div class="post-meta">{post.frontmatter.date}</div>
@@ -58,6 +62,11 @@ const { Content } = await post.render();
         }
         .post-content p {
             margin-bottom: 1rem;
+        }
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
         }
     </style>
 </Layout>
