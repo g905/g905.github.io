@@ -3,34 +3,34 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
+// Импортируем все посты из папки src/content/posts
+const allPosts = await Astro.glob('../../content/posts/*.md');
+
+// Сортируем посты по дате (новые сверху)
+const sortedPosts = allPosts.sort((a, b) => 
+    new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+);
+
 export async function getStaticPaths() {
-    return [
-        { params: { slug: 'my-first-track' } }
-    ];
+    return sortedPosts.map((post) => ({
+        params: { slug: post.url.split('/').pop().replace('.html', '') },
+        props: { post },
+    }));
 }
 
-const { slug } = Astro.params;
-
-const postData = {
-    title: "Первый пост",
-    date: "22 апреля 2026",
-    content: `
-        <p>Всем привет. Запускаю блог.</p>
-        <p>Тут будут мысли о музыке, творчестве, технике, вдохновении. Иногда — просто настроение.</p>
-        <p>Первый трек уже выложил на SoundCloud. Ссылка на плеере выше.</p>
-        <p>Посмотрим, что из этого выйдет. Мне самому интересно.</p>
-        <p>ZHAR</p>
-    `
-};
+const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<Layout title={`ZHAR — ${postData.title}`}>
+<Layout title={`ZHAR — ${post.frontmatter.title}`}>
     <Header />
     
     <article class="post-full">
-        <h1>{postData.title}</h1>
-        <div class="post-meta">{postData.date}</div>
-        <div class="post-content" set:html={postData.content} />
+        <h1>{post.frontmatter.title}</h1>
+        <div class="post-meta">{post.frontmatter.date}</div>
+        <div class="post-content">
+            <Content />
+        </div>
     </article>
 
     <Footer />

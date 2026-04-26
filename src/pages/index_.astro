@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = [
+    {
+        title: "Первый пост",
+        date: "22 апреля 2026",
+        excerpt: "Всем привет. Запускаю блог. Тут будут мысли о музыке, творчестве и maybe всякое разное.",
+        link: "/posts/my-first-track"
+    }
+];
+---
+
+<Layout title="ZHAR — музыкальный блог">
+    <Header />
+    
+    <section class="hero">
+        <h1>музыка и мысли</h1>
+        <p>поп-панк, электроника, брейкбит. и немного слов.</p>
+    </section>
+
+    <section class="posts">
+        {posts.map(post => <PostCard post={post} />)}
+    </section>
+
+    <Footer />
+
+    <style>
+        .hero {
+            margin-bottom: 3rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</Layout>
