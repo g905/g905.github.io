@@ -5,7 +5,6 @@ import Footer from '../components/Footer.astro';
 import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
-// Получаем все посты и сортируем по дате
 const allPosts = await getCollection('posts');
 const posts = allPosts.sort((a, b) => 
     new Date(b.data.date) - new Date(a.data.date)
@@ -26,7 +25,7 @@ const posts = allPosts.sort((a, b) =>
                 title: post.data.title,
                 date: post.data.date,
                 excerpt: post.data.excerpt || "Читать далее...",
-                link: `/posts/${post.slug}`
+                link: `/posts/${post.id}`
             }} />
         ))}
     </section>
