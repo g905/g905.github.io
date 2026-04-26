@@ -3,13 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
 
-// Получаем все посты
-const allPosts = await Astro.glob('../content/posts/*.md');
-
-// Сортируем по дате (новые сверху)
+// Получаем все посты и сортируем по дате
+const allPosts = await getCollection('posts');
 const posts = allPosts.sort((a, b) => 
-    new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+    new Date(b.data.date) - new Date(a.data.date)
 );
 ---
 
@@ -22,22 +21,14 @@ const posts = allPosts.sort((a, b) =>
     </section>
 
     <section class="posts">
-        {
-            posts.map((post) => {
-                // Извлекаем slug из пути к файлу
-                const filePath = post.file;
-                const slug = filePath.split('/').pop().replace('.md', '');
-                
-                return (
-                    <PostCard post={{
-                        title: post.frontmatter.title,
-                        date: post.frontmatter.date,
-                        excerpt: post.frontmatter.excerpt || post.frontmatter.description || "Читать далее...",
-                        link: `/posts/${slug}`
-                    }} />
-                );
-            })
-        }
+        {posts.map((post) => (
+            <PostCard post={{
+                title: post.data.title,
+                date: post.data.date,
+                excerpt: post.data.excerpt || "Читать далее...",
+                link: `/posts/${post.slug}`
+            }} />
+        ))}
     </section>
 
     <Footer />
