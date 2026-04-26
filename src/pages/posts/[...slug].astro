@@ -3,19 +3,23 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
-// Импортируем все посты из папки src/content/posts
+// Импортируем все посты
 const allPosts = await Astro.glob('../../content/posts/*.md');
 
-// Сортируем посты по дате (новые сверху)
+// Сортируем по дате
 const sortedPosts = allPosts.sort((a, b) => 
     new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
 );
 
 export async function getStaticPaths() {
-    return sortedPosts.map((post) => ({
-        params: { slug: post.url.split('/').pop().replace('.html', '') },
-        props: { post },
-    }));
+    return sortedPosts.map((post) => {
+        // Получаем slug из имени файла
+        const slug = post.url.split('/').pop().replace('.html', '');
+        return {
+            params: { slug },
+            props: { post },
+        };
+    });
 }
 
 const { post } = Astro.props;
