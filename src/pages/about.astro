@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="ZHAR — обо мне">
+    <Header />
+    
+    <section class="hero">
+        <h1>привет, я — <span class="logo-inline">ZH⚡R</span></h1>
+        <p>человек и нейросеть</p>
+    </section>
+
+    <section class="about-content">
+        <p>Начал делать этот сайт ради любопытства — посмотрим, к чему я приду через время и насколько такой формат вообще актуален — для меня и для кого-то ещё.</p>
+        <p>В первую очередь выкладываю музыку, которую делаю в свободное от других занятий время. Наверное, это можно назвать продвижением.</p>
+        <p>В общем, привет, интернет.</p>
+    </section>
+
+    <section class="contacts">
+        <h2>где меня найти</h2>
+        <ul>
+            <li><a href="https://soundcloud.com/pender-bender" target="_blank" rel="noopener noreferrer">SoundCloud</a></li>
+        </ul>
+    </section>
+
+    <Footer />
+
+    <style>
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .logo-inline {
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .hero p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        .about-content {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+        .contacts h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        .contacts ul {
+            list-style: none;
+        }
+        .contacts li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</Layout>

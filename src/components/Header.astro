@@ -1,0 +1,52 @@
+<header>
+    <div class="logo">
+        <a href="/">ZH⚡R</a>
+    </div>
+    <nav>
+        <a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>блог</a>
+        <a href="/music" class={Astro.url.pathname === '/music' ? 'active' : ''}>музыка</a>
+        <a href="/about" class={Astro.url.pathname === '/about' ? 'active' : ''}>обо мне</a>
+    </nav>
+</header>
+
+<style>
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+    .logo {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    nav {
+        display: flex;
+        gap: 1.5rem;
+    }
+    nav a {
+        font-size: 0.9rem;
+        text-transform: lowercase;
+        padding-bottom: 0.25rem;
+    }
+    nav a.active {
+        color: var(--accent);
+        border-bottom: 2px solid var(--accent);
+    }
+    @media (max-width: 600px) {
+        header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+</style>

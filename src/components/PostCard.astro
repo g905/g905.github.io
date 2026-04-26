@@ -1,0 +1,58 @@
+---
+export interface Props {
+    post: {
+        title: string;
+        date: string;
+        excerpt: string;
+        link: string;
+    };
+}
+
+const { post } = Astro.props;
+---
+
+<article class="post-card">
+    <h2 class="post-title">
+        <a href={post.link}>{post.title}</a>
+    </h2>
+    <div class="post-meta">{post.date}</div>
+    <p class="post-excerpt">{post.excerpt}</p>
+    <a href={post.link} class="read-more">читать →</a>
+</article>
+
+<style>
+    .post-card {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .post-card:last-child {
+        border-bottom: none;
+    }
+    .post-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    .post-title a {
+        transition: color 0.2s ease;
+    }
+    .post-meta {
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin-bottom: 0.75rem;
+    }
+    .post-excerpt {
+        color: var(--gray);
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+    }
+    .read-more {
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-weight: 500;
+    }
+    .read-more:hover {
+        color: var(--accent-hover);
+    }
+</style>

@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MusicPlayer from '../components/MusicPlayer.astro';
+---
+
+<Layout title="ZHAR — музыка">
+    <Header />
+    
+    <section class="hero">
+        <h1>треки</h1>
+        <p>что успел наделать. пока мало, но будет больше.</p>
+    </section>
+
+    <section class="tracks">
+        <MusicPlayer />
+    </section>
+
+    <Footer />
+
+    <style>
+        .hero {
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .hero p {
+            color: var(--gray);
+        }
+        .tracks {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    </style>
+</Layout>
