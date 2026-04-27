@@ -1,13 +1,72 @@
+---
+export interface Props {
+    trackUrl?: string;
+    trackTitle?: string;
+    trackArtist?: string;
+}
+
+const { 
+    trackUrl = "https://vk.com/music/playlist/-154094046_6_328b30e8c41d7dfa4a",
+    trackTitle = "P5", 
+    trackArtist = "ZHAR" 
+} = Astro.props;
+---
+
 <div class="track-card">
     <div class="track-info">
         <div class="track-title">{trackTitle}</div>
         <div class="track-meta">{trackArtist}</div>
     </div>
     
-    <!-- Простая ссылка — ВК сам развернёт её в виджет -->
-    <div class="vk-widget">
-        <a href="https://vk.com/music/album/-2000440955_27440955_c49908a5d0172780fd" target="_blank" rel="noopener noreferrer" class="vk-link">
+    <div class="vk-link-wrapper">
+        <a href={trackUrl} target="_blank" rel="noopener noreferrer" class="vk-link">
             🎵 Слушать на ВК Музыке
         </a>
     </div>
 </div>
+
+<style>
+    .track-card {
+        background: var(--card-bg);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .track-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .track-info {
+        margin-bottom: 1rem;
+    }
+    .track-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    .track-meta {
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin-bottom: 1rem;
+    }
+    .vk-link-wrapper {
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+    .vk-link {
+        display: inline-block;
+        background: #0077ff;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    .vk-link:hover {
+        background: #0055cc;
+        transform: scale(1.02);
+        color: white;
+    }
+</style>
