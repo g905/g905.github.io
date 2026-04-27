@@ -2,15 +2,25 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 export default function copyImagesPlugin() {
-    let outDir;
+    let outDir = null;
+    
     return {
         name: 'copy-images',
         configResolved(config) {
+            // Берём выходную директорию из конфига
             outDir = config.build.client;
+            console.log(`📁 Copy-images plugin: outDir = ${outDir}`);
         },
-        async closeBundle() {
-            const srcBase = './src/content/posts';
-            const destBase = path.join(outDir, 'posts');
+        async writeBundle() {
+            if (!outDir) {
+                console.warn('⚠️ copy-images: outDir is undefined, skipping');
+                return;
+            }
+            
+            const srcBase = path.resolve(process.cwd(), 'src/content/posts');
+            const destBase = path.resolve(outDir, 'posts');
+            
+            console.log(`📁 Copying images from ${srcBase} to ${destBase}`);
             
             async function copyAllImages(dir) {
                 try {
@@ -28,11 +38,17 @@ export default function copyImagesPlugin() {
                         }
                     }
                 } catch (err) {
-                    if (err.code !== 'ENOENT') console.warn('Copy images warning:', err.message);
+                    if (err.code !== 'ENOENT') {
+                        console.warn(`⚠️ Copy images warning: ${err.message}`);
+                    }
                 }
             }
             
-            await copyAllImages(srcBase);
+            try {
+                await copyAllImages(srcBase);
+            } catch (err) {
+                console.warn(`⚠️ Could not copy images: ${err.message}`);
+            }
         }
     };
 }
