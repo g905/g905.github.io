@@ -81,5 +81,39 @@ const { Content } = await render(post);
             margin: 1rem auto;
             display: block;
         }
+         /* Увеличенные отступы над подзаголовками внутри поста */
+    .post-content h2, .post-content h3 {
+        margin-top: 2.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Красивые маркированные списки внутри поста */
+    .post-content ul {
+        list-style: none !important;
+        padding-left: 1.5rem !important;
+        margin: 1rem 0 1.5rem 0 !important;
+    }
+
+    .post-content ul li {
+        position: relative;
+        padding-left: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.5;
+    }
+
+    .post-content ul li::before {
+        content: "•";
+        color: var(--accent, #ff3a00);
+        font-weight: bold;
+        font-size: 1.2rem;
+        position: absolute;
+        left: 0;
+        top: -0.05rem;
+    }
+
+    .post-content ul ul li::before {
+        content: "◦";
+        color: var(--gray, #aaaaaa);
+    }
     </style>
 </Layout>
