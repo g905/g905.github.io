@@ -92,3 +92,38 @@ pre, code {
     max-width: 100%;
     overflow-x: auto;
 }
+
+/* Увеличенные отступы над подзаголовками */
+article h2, article h3,
+.post-content h2, .post-content h3,
+main h2, main h3 {
+    margin-top: 2.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Красивые маркированные списки */
+article ul, .post-content ul,
+main ul {
+    list-style: none !important;
+    padding-left: 1.5rem !important;
+    margin: 1rem 0 1.5rem 0 !important;
+}
+
+article ul li, .post-content ul li,
+main ul li {
+    position: relative;
+    padding-left: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.5;
+}
+
+article ul li::before, .post-content ul li::before,
+main ul li::before {
+    content: "•";
+    color: var(--accent, #ff3a00);
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: -0.05rem;
+}
