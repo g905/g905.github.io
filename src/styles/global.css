@@ -54,3 +54,18 @@ a:hover {
 .fade-in {
     animation: fadeIn 0.5s ease forwards;
 }
+
+.vk-link {
+    display: inline-block;
+    background: #0077ff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.vk-link:hover {
+    background: #0055cc;
+    transform: scale(1.02);
+}
