@@ -54,3 +54,41 @@ a:hover {
 .fade-in {
     animation: fadeIn 0.5s ease forwards;
 }
+
+/* Горизонтальные линии — увеличенные отступы */
+hr {
+    margin: 3rem 0 !important;
+    border: none;
+    height: 1px;
+    background: var(--border, #2a2a2a);
+}
+
+/* Убираем горизонтальную прокрутку */
+body {
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Все контейнеры не шире экрана */
+.container, main, .container-fluid, [class*="container"] {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Картинки не вылезают за экран */
+img, video, iframe {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Блоки кода и преформатированный текст */
+pre, code {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    overflow-x: auto;
+}
