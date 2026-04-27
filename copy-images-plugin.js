@@ -1,26 +1,42 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 export default function copyImagesPlugin() {
-    let outDir = null;
+    let rootDir;
+    let outDir;
     
     return {
         name: 'copy-images',
+        async buildStart() {
+            // Определяем корневую директорию проекта
+            rootDir = process.cwd();
+            console.log(`📁 copy-images plugin: rootDir = ${rootDir}`);
+        },
         configResolved(config) {
-            // Берём выходную директорию из конфига
+            // Получаем выходную директорию из конфига Astro
             outDir = config.build.client;
-            console.log(`📁 Copy-images plugin: outDir = ${outDir}`);
+            console.log(`📁 copy-images plugin: outDir = ${outDir}`);
         },
         async writeBundle() {
+            // Защита от undefined
             if (!outDir) {
-                console.warn('⚠️ copy-images: outDir is undefined, skipping');
-                return;
+                console.warn('⚠️ copy-images: outDir is undefined, trying to resolve...');
+                outDir = path.join(process.cwd(), 'dist');
             }
             
-            const srcBase = path.resolve(process.cwd(), 'src/content/posts');
-            const destBase = path.resolve(outDir, 'posts');
+            const srcBase = path.join(process.cwd(), 'src', 'content', 'posts');
+            const destBase = path.join(outDir, 'posts');
             
-            console.log(`📁 Copying images from ${srcBase} to ${destBase}`);
+            console.log(`📁 Copying from ${srcBase} to ${destBase}`);
+            
+            // Проверяем, существует ли исходная папка
+            try {
+                await fs.access(srcBase);
+            } catch {
+                console.log(`📁 Source folder ${srcBase} does not exist, skipping`);
+                return;
+            }
             
             async function copyAllImages(dir) {
                 try {
@@ -39,13 +55,14 @@ export default function copyImagesPlugin() {
                     }
                 } catch (err) {
                     if (err.code !== 'ENOENT') {
-                        console.warn(`⚠️ Copy images warning: ${err.message}`);
+                        console.warn(`⚠️ Copy images error: ${err.message}`);
                     }
                 }
             }
             
             try {
                 await copyAllImages(srcBase);
+                console.log('📁 copy-images: finished');
             } catch (err) {
                 console.warn(`⚠️ Could not copy images: ${err.message}`);
             }

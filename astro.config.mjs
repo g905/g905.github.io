@@ -5,6 +5,9 @@ export default defineConfig({
     site: 'https://g905.github.io',
     trailingSlash: 'never',
     vite: {
-        plugins: [copyImagesPlugin()]
+        plugins: [copyImagesPlugin()],
+        build: {
+            assetsInlineLimit: 0
+        }
     }
 });
